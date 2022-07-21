@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1p3p5p7p
+    url: jdbc:postgresql://localhost:5432/paintings_repository
+
+  liquibase:
+    change-log: classpath:liquibase-changelog.yml
+
+server:
+  port: 8081
