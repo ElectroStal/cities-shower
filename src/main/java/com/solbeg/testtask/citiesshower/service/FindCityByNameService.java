@@ -20,7 +20,7 @@ public class FindCityByNameService {
         this.errorHandler = errorHandler;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Message findCityByName(Message message) {
         Message result = new Message();
         try {
@@ -29,7 +29,7 @@ public class FindCityByNameService {
                     .map(t -> t.get(0))
                     .map(City::getName).get();
             City city = citiesRepository.findByName(cityName);
-            result = createMessage(new Message(), city);
+            result = createMessage(city);
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (Exception e) {
             result = errorHandler.createErrorMessage(1, "Internal error", result);
@@ -37,7 +37,7 @@ public class FindCityByNameService {
         return result;
     }
 
-    private Message createMessage(Message message, City city) {
+    private Message createMessage(City city) {
         Message responseMessage = new Message();
         BusinessEntity businessEntity = new BusinessEntity();
         businessEntity.getCity().add(city);

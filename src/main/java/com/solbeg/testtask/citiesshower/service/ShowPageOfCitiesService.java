@@ -24,7 +24,7 @@ public class ShowPageOfCitiesService {
         this.errorHandler = errorHandler;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Message getCities(Message message) {
         Message result = new Message();
         try {
@@ -32,7 +32,7 @@ public class ShowPageOfCitiesService {
                     .orElseThrow(() -> new CitiesException("Incorrect request"));
             Page<City> page = citiesRepository.findAll(PageRequest.of(businessEntity.getCurrentPage(),
                     businessEntity.getPageSize()));
-            result = createMessage(new Message(), page.getContent());
+            result = createMessage(page.getContent());
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (CitiesException e) {
             result = errorHandler.createErrorMessage(1, e.getErrorMessage(), result);
@@ -42,7 +42,7 @@ public class ShowPageOfCitiesService {
         return result;
     }
 
-    private Message createMessage(Message message, List<City> cities) {
+    private Message createMessage(List<City> cities) {
         Message responseMessage = new Message();
         BusinessEntity businessEntity = new BusinessEntity();
         businessEntity.getCity().addAll(cities);

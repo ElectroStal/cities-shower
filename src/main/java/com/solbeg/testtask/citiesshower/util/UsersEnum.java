@@ -1,7 +1,8 @@
 package com.solbeg.testtask.citiesshower.util;
 
 public enum  UsersEnum {
-    USER("ROLE_ALLOW_EDIT");
+    USER("ALLOW_READ"),
+    ADMIN("ALLOW_EDIT");
 
     private String user;
 

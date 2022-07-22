@@ -10,18 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ChangeCityInformationService {
+public class CitiesUpdateService {
 
     private CitiesRepository citiesRepository;
     private ErrorHandler errorHandler;
 
-    public ChangeCityInformationService(CitiesRepository citiesRepository, ErrorHandler errorHandler) {
+    public CitiesUpdateService(CitiesRepository citiesRepository, ErrorHandler errorHandler) {
         this.citiesRepository = citiesRepository;
         this.errorHandler = errorHandler;
     }
 
     @Transactional
-    public Message updateCity(Message message) {
+    public Message changeCity(Message message) {
         Message result = new Message();
         try {
             City city = Optional.ofNullable(message.getBusinessEntity())
