@@ -30,7 +30,7 @@ public class ShowPageOfCitiesService {
         try {
             BusinessEntity businessEntity = Optional.ofNullable(message.getBusinessEntity())
                     .orElseThrow(() -> new CitiesException("Incorrect request"));
-            Page<City> page = citiesRepository.findAll(PageRequest.of(businessEntity.getCurrentPage() + 1,
+            Page<City> page = citiesRepository.findAll(PageRequest.of(businessEntity.getCurrentPage(),
                     businessEntity.getPageSize()));
             result = createMessage(new Message(), page.getContent());
             result = errorHandler.createErrorMessage(0, null, result);

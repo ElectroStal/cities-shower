@@ -1,4 +1,4 @@
-dataBaseChangeLog:
+databaseChangeLog:
   - changeSet:
       id: crete-cities
       author: Danila

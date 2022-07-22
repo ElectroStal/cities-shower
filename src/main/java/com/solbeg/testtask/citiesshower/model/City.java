@@ -8,12 +8,12 @@ public class City {
     @Id
     private int id;
     private String name;
-    private String photoReference;
+    private String photo;
 
-    public City(int id, String name, String photoReference) {
+    public City(int id, String name, String photo) {
         this.id = id;
         this.name = name;
-        this.photoReference = photoReference;
+        this.photo = photo;
     }
 
     public City() {
@@ -35,11 +35,11 @@ public class City {
         this.name = name;
     }
 
-    public String getPhotoReference() {
-        return photoReference;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotoReference(String photoReference) {
-        this.photoReference = photoReference;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

@@ -15,6 +15,6 @@ public interface CitiesRepository extends PagingAndSortingRepository<City, Long>
     City findByName(String name);
 
     @Modifying
-    @Query("update City u set u.name = :name, u.photoReference = :photoReference where u.id = :id")
-    City setCity(@Param(value = "id") long id, @Param(value = "name") String name, @Param(value = "name") String photoReference);
+    @Query("update City u set u.name = :name, u.photo = :photo where u.id = :id")
+    City setCity(@Param(value = "id") long id, @Param(value = "name") String name, @Param(value = "photo") String photo);
 }

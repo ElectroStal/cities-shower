@@ -27,7 +27,7 @@ public class ChangeCityInformationService {
             City city = Optional.ofNullable(message.getBusinessEntity())
                     .map(BusinessEntity::getCity)
                     .map(t -> t.get(0)).get();
-            citiesRepository.setCity(city.getId(), city.getName(), city.getPhotoReference());
+            citiesRepository.setCity(city.getId(), city.getName(), city.getPhoto());
             result = errorHandler.createErrorMessage(0, null, message);
         } catch (Exception e) {
             result = errorHandler.createErrorMessage(1, "Internal error", result);

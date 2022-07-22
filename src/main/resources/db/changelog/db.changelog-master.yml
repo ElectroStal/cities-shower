@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - preConditions:
+  - runningAs:
+      username:  liquibase
+
+  - include:
+      file: db/changelog/changeset/create-city-table.yaml
+  - include:
+      file: classpath:db/changelog/changeset/insert-city-values.yaml
