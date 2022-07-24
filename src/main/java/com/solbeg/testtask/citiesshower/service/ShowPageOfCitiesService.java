@@ -5,6 +5,7 @@ import com.solbeg.testtask.citiesshower.model.BusinessEntity;
 import com.solbeg.testtask.citiesshower.model.City;
 import com.solbeg.testtask.citiesshower.model.Message;
 import com.solbeg.testtask.citiesshower.repository.CitiesRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ShowPageOfCitiesService {
 
-    private CitiesRepository citiesRepository;
-    private ErrorHandler errorHandler;
+    private final CitiesRepository citiesRepository;
+    private final ErrorHandler errorHandler;
 
     public ShowPageOfCitiesService(CitiesRepository citiesRepository, ErrorHandler errorHandler) {
         this.citiesRepository = citiesRepository;
@@ -33,6 +35,7 @@ public class ShowPageOfCitiesService {
             Page<City> page = citiesRepository.findAll(PageRequest.of(businessEntity.getCurrentPage(),
                     businessEntity.getPageSize()));
             result = createMessage(page.getContent());
+            log.info("Database called successfully for request with messageId = {}, response = {}", message.getMessageId(), page.getContent());
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (CitiesException e) {
             result = errorHandler.createErrorMessage(1, e.getErrorMessage(), result);
@@ -45,7 +48,7 @@ public class ShowPageOfCitiesService {
     private Message createMessage(List<City> cities) {
         Message responseMessage = new Message();
         BusinessEntity businessEntity = new BusinessEntity();
-        businessEntity.getCity().addAll(cities);
+        businessEntity.getEntities().addAll(cities);
         responseMessage.setBusinessEntity(businessEntity);
         return responseMessage;
     }

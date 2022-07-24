@@ -1,30 +1,16 @@
 package com.solbeg.testtask.citiesshower.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Message {
+    private String messageId;
     private TechEntity techEntity;
     private BusinessEntity businessEntity;
-
-    public Message() {
-    }
-
-    public void setTechEntity(TechEntity techEntity) {
-        this.techEntity = techEntity;
-    }
-
-    public void setBusinessEntity(BusinessEntity businessEntity) {
-        this.businessEntity = businessEntity;
-    }
-
-    public TechEntity getTechEntity() {
-        return techEntity;
-    }
-
-    public BusinessEntity getBusinessEntity() {
-        return businessEntity;
-    }
-
-    public Message(TechEntity techEntity, BusinessEntity businessEntity) {
-        this.techEntity = techEntity;
-        this.businessEntity = businessEntity;
-    }
 }

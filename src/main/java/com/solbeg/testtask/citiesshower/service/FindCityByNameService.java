@@ -4,16 +4,18 @@ import com.solbeg.testtask.citiesshower.model.BusinessEntity;
 import com.solbeg.testtask.citiesshower.model.City;
 import com.solbeg.testtask.citiesshower.model.Message;
 import com.solbeg.testtask.citiesshower.repository.CitiesRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class FindCityByNameService {
 
-    private CitiesRepository citiesRepository;
-    private ErrorHandler errorHandler;
+    private final CitiesRepository citiesRepository;
+    private final ErrorHandler errorHandler;
 
     public FindCityByNameService(CitiesRepository citiesRepository, ErrorHandler errorHandler) {
         this.citiesRepository = citiesRepository;
@@ -25,10 +27,12 @@ public class FindCityByNameService {
         Message result = new Message();
         try {
             String cityName = Optional.ofNullable(message.getBusinessEntity())
-                    .map(BusinessEntity::getCity)
+                    .map(BusinessEntity::getEntities)
                     .map(t -> t.get(0))
                     .map(City::getName).get();
+            log.info("Prepare to call database for operation findCity for message with messageId = {}, requestParameter = {}", message.getMessageId(), cityName);
             City city = citiesRepository.findByName(cityName);
+            log.info("Database called successfully for request with messageId = {}, response = {}", message.getMessageId(), city);
             result = createMessage(city);
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (Exception e) {
@@ -40,7 +44,7 @@ public class FindCityByNameService {
     private Message createMessage(City city) {
         Message responseMessage = new Message();
         BusinessEntity businessEntity = new BusinessEntity();
-        businessEntity.getCity().add(city);
+        businessEntity.getEntities().add(city);
         responseMessage.setBusinessEntity(businessEntity);
         return responseMessage;
     }
