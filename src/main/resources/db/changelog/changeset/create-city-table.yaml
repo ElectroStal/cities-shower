@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: crete-cities
+      id: create-cities
       author: Danila
       changes:
         - createTable:

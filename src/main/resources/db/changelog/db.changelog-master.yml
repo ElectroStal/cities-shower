@@ -7,3 +7,7 @@ databaseChangeLog:
       file: db/changelog/changeset/create-city-table.yaml
   - include:
       file: classpath:db/changelog/changeset/insert-city-values.yaml
+  - include:
+      file: classpath:db/changelog/changeset/create-users-table.yaml
+  - include:
+      file: classpath:db/changelog/changeset/insert-users-table.yaml

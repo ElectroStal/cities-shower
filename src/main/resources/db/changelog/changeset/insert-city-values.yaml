@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-values
+      id: insert-cities
       author: Danila
       changes:
         - insert:
