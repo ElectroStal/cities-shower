@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
+    username: admin
     password: 1p3p5p7p
-    url: jdbc:postgresql://localhost:5432/paintings_repository
+    url: jdbc:postgresql://localhost:8082/postgres
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yml
